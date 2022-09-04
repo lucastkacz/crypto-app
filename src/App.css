@@ -3,3 +3,16 @@
 	color: greenyellow;
 	font-family: "Courier New", Courier, monospace;
 }
+
+#ticker {
+	color: antiquewhite;
+	text-align: center;
+}
+
+.panel {
+	border: 2px green solid;
+	padding: 10px;
+	width: fit-content;
+	height: fit-content;
+	text-align: left;
+}
