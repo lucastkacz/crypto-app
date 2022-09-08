@@ -1,36 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import useState from "react-usestateref";
 
-const endpointUrl = "https://api.binance.com/api/v3/uiKlines?symbol=BTCUSDT&interval=1h&limit=200";
+const endpointUrl = "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=200";
 
 const Test = () => {
-	// const [klines, setKlines] = useState([]);
-	const [kline, setKline] = useState({});
-
-	const fetchApi = async () => {
-		const response = await fetch(endpointUrl);
-		const responseData = await response.json();
-
-		console.log(responseData);
-
-		for (let i = 0; i < responseData.length; i++) {
-			setKline({
-				time: responseData[i][0],
-				open: responseData[i][1],
-				high: responseData[i][2],
-				low: responseData[i][3],
-				close: responseData[i][4],
-			});
-			console.log(kline);
-		}
-	};
+	const [klines, setKlines] = useState([]);
 
 	useEffect(() => {
-		fetchApi();
+		const fetchApi = async () => {
+			const response = await fetch(endpointUrl);
+			const responseData = await response.json();
+
+			if (responseData) {
+				for (let i = 0; i < responseData.length; i++) {
+					let kline = {
+						time: responseData[i][0],
+						open: responseData[i][1],
+						high: responseData[i][2],
+						low: responseData[i][3],
+						close: responseData[i][4],
+					};
+					setKlines((prev) => [...prev, kline]);
+				}
+			}
+		};
+		fetchApi().catch(console.error);
 	}, []);
 
 	return (
 		<div>
-			<ul>boca</ul>
+			{klines.map((obj, index) => {
+				return <p key={index}>{obj["close"]}</p>;
+			})}
 		</div>
 	);
 };
@@ -53,3 +54,14 @@ export default Test;
 //       "0"                 // Unused field, ignore.
 //     ]
 // ]
+
+// for (let i = 0; i < responseData.length; i++) {
+// 	setKline({
+// 		time: responseData[i][0],
+// 		open: responseData[i][1],
+// 		high: responseData[i][2],
+// 		low: responseData[i][3],
+// 		close: responseData[i][4],
+// 	});
+// 	console.log(kline);
+// }
