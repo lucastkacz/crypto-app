@@ -1,8 +1,9 @@
-/* * {
-	background-color: black;
+html {
 	color: greenyellow;
+	background-color: black;
 	font-family: "Courier New", Courier, monospace;
-} */
+	font-size: 20px;
+}
 
 #ticker {
 	color: antiquewhite;
@@ -12,8 +13,8 @@
 .panel {
 	border: 2px green solid;
 	padding: 10px;
-	width: 300px;
-	height: 200px;
+	width: fit-content;
+	height: auto;
 	text-align: left;
 	margin: 5px;
 }
@@ -21,4 +22,13 @@
 #panel {
 	width: 300px;
 	height: 200px;
+}
+
+#chart {
+	background-color: aliceblue;
+}
+
+.top-bar {
+	display: flex;
+	justify-content: space-between;
 }
